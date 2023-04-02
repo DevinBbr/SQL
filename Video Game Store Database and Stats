@@ -1,0 +1,33 @@
+--Create a video game store database
+
+CREATE TABLE games(
+id INTEGER PRIMARY KEY,
+name TEXT,
+price INTEGER,
+system TEXT,
+rating INTEGER);
+
+INSERT INTO games VALUES 
+(1, "fortnite", 0, "PS5", 5),
+(2, "h1z1", 0, "PS4", 5),
+(3, "pokemon scarlet", 60, "switch", 4),
+(4, "cyberpunk 2077", 60, "PS4", 2),
+(5, "Watch Dogs", 45, "PS4", 3),
+(6, "Avengers", 30, "PS5", 3),
+(7, "GTA 5", 65, "PS3", 5),
+(8, "Destiny 2", 25, "PS5", 4),
+(9, "Farcry 5", 65, "PS4", 5),
+(10, "Farcry 6", 70, "PS5", 3),
+(11, "Spider Man", 30, "PS5", 5),
+(12, "Miles Morales", 45, "PS5", 5),
+(13, "Horizon Zero Dawn", 20, "PS4", 5),
+(14, "God of War(2018)", 20, "PS4", 4),
+(15, "God of War Ragnorok", 70, "PS5", 5);
+
+--display the database ordered by price. 
+SELECT * FROM games
+ORDER BY price desc; 
+
+--what is the avg price of games in the store? 
+SELECT AVG(price) "avg game price"
+FROM games 
