@@ -816,18 +816,25 @@ INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (721,'Volcanion','Fire','Water',600,80,110,120,130,90,70,6,'True');
 
 
-
+/* Display the highest hp stat of all the pokemon */
 SELECT MAX(HP) AS Highest_HP FROM pokemon;
+
+/* The average speed of all of the pokemon */
 SELECT AVG(Speed) AS AVG_Speed FROM pokemon;
+
+/* Displays the lowest defense stat of all the pokemon */
 SELECT MIN(Defense) AS Lowest_Defense FROM pokemon;
 
-
+/* Select Fire pokemon with a speed stat less than 100 */
 SELECT name, Speed FROM pokemon WHERE Type_1 = "Fire"
 GROUP BY Name
 HAVING Speed <100;
 
+/*Select only Gen 3 Water pokemon */
 SELECT name, type_1 FROM pokemon WHERE Type_1='Water' AND Generation = 3;
 
+/* Select only Gen 1 Grass type pokemon */
 SELECT name AS 'NAME', type_1 AS 'TYPE' FROM pokemon WHERE Type_1='Grass' AND Generation = 1;
 
+/* Select electric pokemon with a speed stat lower than 90 */
 SELECT name, Speed, Type_1 FROM pokemon WHERE Type_1= 'Electric' OR Speed < 90;
