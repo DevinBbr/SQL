@@ -1,0 +1,30 @@
+#In this SQL code, I'm querying a database that's holding Nexflix data to answer questions about the data. 
+
+--Try to figure out which attribute you'd use to be able to join the two tables
+SELECT director, title
+    FROM "CharlotteChaze/BreakIntoTech"."netflix_people"
+    JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    ON netflix_people.show_id=netflix_titles_info.show_id;
+
+--'How many movie titles are there in the database? (movies only, not tv shows)'
+SELECT count(*) FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    WHERE type = 'Movie';
+
+--When was the most recent batch of tv shows and/or movies added to the database?
+SELECT max(date(date_added)) FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+--List all the movies and tv shows in alphabetical order.
+SELECT * FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    ORDER BY title ASC;
+
+--Who was the Director for the movie Bright Star? 
+SELECT director, title
+    FROM "CharlotteChaze/BreakIntoTech"."netflix_people"
+    JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    ON netflix_people.show_id=netflix_titles_info.show_id 
+    WHERE title = 'Bright Star';
+
+--What is the oldest movie in the database and what year was it made? 
+SELECT type as movie, title, release_year FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+    WHERE type='Movie'
+    ORDER BY release_year ASC LIMIT 1;
