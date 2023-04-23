@@ -42,3 +42,9 @@ SELECT count(order_id) AS customers, quantity, avg(quantity*price) AS AVERAGE FR
 JOIN FebSales
 ON order_id=orderID
 WHERE length(order_id)=6 AND Quantity > 2;
+
+#8. List all the products sold in Los Angeles in February, and include how many of each were sold. 
+
+SELECT location, product, sum(quantity) FROM FebSales
+WHERE location LIKE '%Los Angeles%'
+GROUP BY product;
