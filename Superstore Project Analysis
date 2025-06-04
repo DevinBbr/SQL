@@ -21,14 +21,27 @@ FROM superstore;
 SELECT MAX(price)
 FROM superstore;
 
--- Write your own SQL query that will show a statistic about the price for items in the category of "Kitchen Supplies".
+--Write your own SQL query that will show a statistic about the price for items in the category of "Kitchen Supplies".
 
-SELECT SUM(price)
+--Which Kithcen supply costs the most?
+
+SELECT item_name, category, MAX(price)
 FROM superstore
-WHERE category = "Kitchen Supplies";
+WHERE category = 'Kitchen Supplies'
+ORDER BY price DESC;
+
+--The Stainless Steel Cookware costs the most.
 
 -- Come up with your own question about the data and try to answer it using SQL. For example: How many air purifiers are in stock?
 
 SELECT item_name, stock_quantity
 FROM superstore
 WHERE item_name = "Air Purifier";
+
+--Which electronic has the highest rating?
+
+SELECT item_name, MAX(average_rating)
+FROM superstore
+WHERE category = 'Electronics';
+
+-- The Smart LED TV has the highest rating at 4.5
