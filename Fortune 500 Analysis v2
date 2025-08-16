@@ -1,0 +1,62 @@
+--1️⃣ WHERE + NOT IN
+
+--Find all companies not in the Retail or Energy industries that have more than 2000 employees.
+
+SELECT company_name, industry, employees
+FROM fortune_companies
+WHERE industry NOT IN ('Retail', 'Energy')
+  AND employees > 2000;
+
+--2️⃣ Calculation with alias
+
+--Calculate the maternity leave per employee (maternity_leave_weeks ÷ employees) for each company and order them from highest to lowest.
+
+SELECT company_name, maternity_leave_weeks, employees,
+       maternity_leave_weeks * 1.0 / employees AS maternity_per_employee
+FROM fortune_companies
+ORDER BY maternity_per_employee DESC;
+
+--3️⃣ CASE expression
+
+--Categorize companies based on average employee tenure:
+
+--Less than 5 years → ‘Junior-heavy’
+
+--5–7 years → ‘Balanced’
+
+--More than 7 years → ‘Experienced-heavy’
+
+SELECT company_name, avg_employee_tenure,
+       CASE
+           WHEN avg_employee_tenure < 5 THEN 'Junior-heavy'
+           WHEN avg_employee_tenure BETWEEN 5 AND 7 THEN 'Balanced'
+           ELSE 'Experienced-heavy'
+       END AS tenure_category
+FROM fortune_companies;
+
+--4️⃣ HAVING + aggregate function
+
+--Find industries where the total revenue of all companies exceeds 1000.
+
+SELECT industry, SUM(revenue) AS total_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING SUM(revenue) > 1000;
+
+--5️⃣ Combination challenge
+
+--List companies that offer healthcare benefits OR have PTO > 20 days.
+
+--Include a calculated column for revenue per employee.
+
+--Categorize the companies using CASE based on revenue (e.g., ‘High’, ‘Medium’, ‘Low’).
+
+SELECT company_name, industry, revenue, employees, healthcare_benefits, paid_time_off_days,
+       revenue / employees AS revenue_per_employee,
+       CASE
+           WHEN revenue > 400 THEN 'High'
+           WHEN revenue > 250 THEN 'Medium'
+           ELSE 'Low'
+       END AS revenue_category
+FROM fortune_companies
+WHERE healthcare_benefits = 1 OR paid_time_off_days > 20;
